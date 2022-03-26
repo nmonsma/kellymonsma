@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dr. Kelly Monsma, Phypsical Therapist, DPT</title>
+        <link rel="shortcut icon" href=""/>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport" />
+        <meta name="description" content="treatment of chronic pain" />
+        <meta name="keywords" content="chronic pain, cancer, therapy, pain relief, drug free"/>
+        <meta name="author" content="Nick Monsma" />
+        <style type="text/css">
+            * {
+                transition: opacity 1.5s;  
+            }
+            body {
+                background-color: white;
+                margin: 0;
+                padding: 0;
+                width: 100vw;
+                height: 100vh;
+                left: 0;
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: 100vw 1fr;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+            }
+            #graphic {
+                margin-top: -50px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+                }
+            #text {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                display: grid;
+                grid-template-rows: 1fr 0px;
+                background-color: #f3e1f4;
+                color: black;
+            }
+            #description {
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+            }
+            #description p {
+                width: 95vw;
+                position: absolute;                                
+                font-size: 1em;
+                text-align: center;
+                background-color: #f3e1f4;
+            }
+            #main-image {
+                width: 100vw;
+            }
+            #nav {
+                position: absolute;
+                padding: 0;
+                margin: 0;
+                width: 100vw;
+                height: 12vw;
+                top: 89vw;
+                left: 0;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                z-index: 100;
+                background-color: #712a79;
+                color: #fff;                
+            }
+            button {
+                outline: none;
+                border: none;
+                box-shadow: none;
+                margin: 0;
+                padding: 0;                
+                width: 100%;
+                height: 100%;
+                text-transform: uppercase;
+                font-weight: 600;
+                cursor: pointer;
+                background-color: #712a79;
+                color: #fff;     
+            }
+            button:hover {
+                background-color: #461a4b;
+            }
+            .hidden {
+                opacity: 0;
+                z-index: -5;
+            }
+            button.hidden {
+                display: none;
+            }
+            /* @media only screen and (min-width: 1040px) { */
+            @media only screen and (min-aspect-ratio: 2/3) {
+                html {
+                    background-color: black;
+                }
+                
+                /* This block here needs to be rewritten to size correctly, and then RWD will be complete. */
+                
+                body {
+                    overflow: hidden;
+                    margin-top: calc((100vh - min(100vh, 585px)) / 2);
+                    margin-left: calc((100vw - min(100vw, 1040px)) / 2);
+                    width: min(100vw, 1040px);
+                    height: min(100vh, 585px);
+                    grid-template-rows: 1fr;
+                    grid-template-columns: min(60vw, 624px) 1fr;
+                    justify-content: space-evenly;
+                }
+                #graphic {
+                    margin: 0;
+                }
+                #main-image {
+                    width: min(100vh, 585px);
+                }
+                #text, #nav, button, #description {
+                    width: min(40vw, 416px);
+                }
+                #description {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-around;
+                }
+                #description p {
+                    width: min(33vw, 364px);
+                }
+                #text {
+                    grid-template-rows: 1fr 60px;
+                }
+                #nav {
+                    width:100%;
+                    height: unset;
+                    display: flex;
+                    position: unset;
+                    flex-direction: row;
+                    align-items: center;
+                }
+                button {
+                    width: 50%;
+                }
+            }            
+    </style>
+    </head>
+    <body>
+        <div id="graphic">
+            <div class="slide 0" id="video"></div>
+            <div class="slide 1 hidden" id="paper"></div>>                    
+        </div>
+        <div id="text">
+            <div id="description">
+                <p class="slide 0">This is the previous EPCS logo.<br> 
+                    <br>It reminds us that the <b>HOME</b>, the <b>CHURCH</b>, and the <b>SCHOOL</b> all contribute to raising children in the Lord.<br>
+                    <br>The <b>BIBLE</b> and the <b>CROSS</b> symbolize the truth of Scripture and the gospel of Jesus.
+                </p>
+                <p class="slide 1 hidden">The new school symbols are built around those same three words: <b>HOME</b>, <b>CHURCH</b>, and <b>SCHOOL</b>.<br><br>The word <b>HOME</b> is at the base of the triangle because parents have primary responsibility to raise children in the Lord.<br>
+                    <br>"Fathers... bring them up 
+                    <br>in the discipline and instruction of the Lord"
+                    <br>(Eph. 6:4, ESV)</p>
+            </div>
+            <div id="nav">
+                <button class="slide 0" type="button" id="back" onclick="window.history.go(-1);">Back</button>
+                <button class="slide 1 2 3 4 5 6 7 hidden" type="button" id="previous">Previous</button>                
+                <button class="slide 0 1 2 3 4 5 6" type="button" id="next">Next</button>                
+                <button class="slide 7 hidden" type="button" id="exit" onclick="window.history.go(-1);">Exit</button>
+            </div>        
+        </div>
+    </body>
+    <script type="text/javascript">
+        //Set Initial Slide Position Variable to 0
+        let step = 0;
+        const slides = document.getElementsByClassName('slide')
+        //Load Slide based on value of step
+        function loadSlide () {
+            for (let i = 0; i < slides.length; i++) {
+                if (slides[i].classList.contains(`${step}`)) {
+                    if (slides[i].classList.contains('hidden')) {slides[i].classList.remove('hidden')}
+                } else {
+                    if (!slides[i].classList.contains('hidden')) {slides[i].classList.add('hidden')}
+                }
+            }
+        }        
+        //Attach Function to Interactive Elements
+        document.getElementById('next').addEventListener('click', ()=>{step++; loadSlide ()});        
+        document.getElementById('previous').addEventListener('click', ()=>{step--; loadSlide ()});        
+    </script>
+</html>
